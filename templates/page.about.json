@@ -10,35 +10,15 @@
     "9ba7d3da-944e-47df-9f77-61f8fe83fa0d": {
       "type": "rich-text",
       "blocks": {
-        "template--17152925204736__9ba7d3da-944e-47df-9f77-61f8fe83fa0d-heading-1": {
-          "type": "heading",
-          "settings": {
-            "heading": "",
-            "heading_size": "h1"
-          }
-        },
         "template--17152925204736__9ba7d3da-944e-47df-9f77-61f8fe83fa0d-text-1": {
           "type": "text",
           "settings": {
             "text": "<p><strong>Lorem Ipsum<\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\/p>"
           }
-        },
-        "template--17152925204736__9ba7d3da-944e-47df-9f77-61f8fe83fa0d-button-1": {
-          "type": "button",
-          "settings": {
-            "button_label": "",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
         }
       },
       "block_order": [
-        "template--17152925204736__9ba7d3da-944e-47df-9f77-61f8fe83fa0d-heading-1",
-        "template--17152925204736__9ba7d3da-944e-47df-9f77-61f8fe83fa0d-text-1",
-        "template--17152925204736__9ba7d3da-944e-47df-9f77-61f8fe83fa0d-button-1"
+        "template--17152925204736__9ba7d3da-944e-47df-9f77-61f8fe83fa0d-text-1"
       ],
       "settings": {
         "desktop_content_position": "center",
