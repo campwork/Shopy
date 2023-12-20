@@ -13,21 +13,25 @@
 {%- endif -%}
 
 {%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  .card-information {
+      display: none;
   }
 
-  @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
     }
-  }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
-  {%- paginate collection.products by section.settings.products_per_page -%}
+  {%- paginate collection.products by 10 -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide no-js-hidden">
