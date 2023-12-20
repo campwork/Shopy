@@ -10,13 +10,6 @@
             "heading_size": "h0"
           }
         },
-        "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "",
-            "text_style": "body"
-          }
-        },
         "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-buttons-1": {
           "type": "buttons",
           "settings": {
@@ -31,7 +24,6 @@
       },
       "block_order": [
         "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-heading-1",
-        "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-text-1",
         "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-buttons-1"
       ],
       "custom_css": [
