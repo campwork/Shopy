@@ -1,0 +1,45 @@
+<div class="page-width">
+  <div class="text-img-section">
+    <div class="column">
+      <figure
+        class="zoom"
+        onmousemove="zoom(event)"
+        style="background-image: url({{ section.settings.image | img_url: '600x' }})"
+      >
+        <img src="{{ section.settings.image | img_url: '600x' }}">
+      </figure>
+    </div>
+
+    <div class="column">
+      <div>
+        <h2 class="title-text">{{ section.settings.title }}</h2>
+      </div>
+      <div class="rich-text">
+        {{ section.settings.text | rich_text }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Imagen Texto nuevo",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Seleccionar imagen"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto Descriptivo"
+    }
+  ]
+}
+{% endschema %}

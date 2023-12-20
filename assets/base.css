@@ -3503,7 +3503,87 @@ details-disclosure > details {
       0 0 0 var(--buttons-border-width) rgba(var(--color-button), var(--alpha-button-background));
   }
 
+
+
+
+  
+
   .animate--hover-vertical-lift .button:not([disabled]).button--secondary:hover:after {
     --border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
   }
+}
+
+
+
+
+/* Agregamos el css aca para no crear mas archivos */
+
+
+
+.text-img-section {
+  display: flex;
+  flex-wrap: wrap; 
+}
+
+.column {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.title-text {
+  font-weight: 900;
+  font-size: 4rem;
+  color: #2b2b2b;
+}
+
+.imgtext {
+  max-width: 100%;
+  height: auto;
+  
+}
+
+/* Agrega reglas de estilo específicas para pantallas más pequeñas */
+
+@media screen and (max-width: 768px) {
+  .text-img-section {
+    flex-direction: column; 
+  }
+
+  .column {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%; 
+  }
+
+  .imgtext {
+    position: relative;
+    top: 0; 
+  }
+}
+
+/* Agregamos efecto css para efecto zoom */
+
+figure.zoom {
+  background-position: 50% 50%;
+  position: relative;
+  height: 300px;
+  width: 500px;
+  overflow: hidden;
+  cursor: zoom-in;    
+  -moz-box-shadow: 2px 1px 6px 0px rgba(68, 68, 68, 0.705);
+  box-shadow: 2px 1px 6px 0px rgba(68, 68, 68, 0.15);
+  animation: slideInRight 0.6s 0s both;
+  border-radius: 14px;
+  position: sticky;
+  top: 100px;
+}
+figure.zoom img:hover {
+  opacity: 0;
+}
+figure.zoom img {
+  transition: opacity 0.5s;
+  display: block;
+  width: 100%;
 }
