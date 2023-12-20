@@ -7,16 +7,31 @@
         "padding_bottom": 28
       }
     },
-    "text-img-section": {
-      "type": "text-img-section",
+    "9ba7d3da-944e-47df-9f77-61f8fe83fa0d": {
+      "type": "rich-text",
+      "blocks": {
+        "template--17152925204736__9ba7d3da-944e-47df-9f77-61f8fe83fa0d-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Lorem Ipsum<\/strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--17152925204736__9ba7d3da-944e-47df-9f77-61f8fe83fa0d-text-1"
+      ],
       "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     }
   },
   "order": [
     "main",
-    "text-img-section"
+    "9ba7d3da-944e-47df-9f77-61f8fe83fa0d"
   ]
 }
