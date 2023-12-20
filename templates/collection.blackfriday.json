@@ -40,7 +40,7 @@
       "settings": {
         "image": "shopify:\/\/shop_images\/banner-shop_587c45f6-5bf0-4f86-b180-e0b207a95dea.jpg",
         "image_overlay_opacity": 10,
-        "image_height": "large",
+        "image_height": "small",
         "desktop_content_position": "middle-left",
         "show_text_box": true,
         "desktop_content_alignment": "center",
