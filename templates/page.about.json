@@ -7,17 +7,14 @@
         "padding_bottom": 28
       }
     },
-
-
     "text-image-section": {
       "type": "text-img-section",
       "settings": {
-        "padding_top": 28,
-        "padding_bottom": 28
       }
     }
   },
   "order": [
     "main",
-    "text-image-section"   ]
+    "text-image-section"
+  ]
 }
