@@ -34,6 +34,9 @@
         "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-text-1",
         "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-buttons-1"
       ],
+      "custom_css": [
+        "h2 {font-size: 75px; max-width: 215px; display: block; font-weight: 800;}"
+      ],
       "settings": {
         "image": "shopify:\/\/shop_images\/banner-shop.jpg",
         "image_overlay_opacity": 0,
