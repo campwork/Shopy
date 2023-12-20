@@ -1,0 +1,84 @@
+{
+  "sections": {
+    "e8e977d8-a227-4ad9-9ad9-b7fa74942b94": {
+      "type": "image-banner",
+      "blocks": {
+        "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Black Friday Sales<\/strong>",
+            "heading_size": "h0"
+          }
+        },
+        "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-buttons-1": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-heading-1",
+        "template--17151980536064__e8e977d8-a227-4ad9-9ad9-b7fa74942b94-buttons-1"
+      ],
+      "custom_css": [
+        "h2 {font-size: 65px; max-width: 250px; display: block; font-weight: 800;}"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/banner-shop_587c45f6-5bf0-4f86-b180-e0b207a95dea.jpg",
+        "image_overlay_opacity": 10,
+        "image_height": "small",
+        "desktop_content_position": "middle-left",
+        "show_text_box": false,
+        "desktop_content_alignment": "left",
+        "color_scheme": "scheme-3",
+        "image_behavior": "zoom-in",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "custom_css": [
+        ".card-information {display:none}"
+      ],
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "e8e977d8-a227-4ad9-9ad9-b7fa74942b94",
+    "banner",
+    "product-grid"
+  ]
+}
