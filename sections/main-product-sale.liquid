@@ -7,6 +7,172 @@
 }
 {% endschema %}
 
-<div id="main">
-  <h1 id="product_title">{{ product.title }}</h1>
-</div>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.title }}</title>
+    <!-- Incluye las librerías de Slider (SplideJS) y cualquier estilo adicional -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.0.4/dist/css/splide.min.css">
+    <style>
+      /* Estilos adicionales según tus necesidades */
+      .product-container {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .product-images {
+        width: 45%; /* Ajusta según sea necesario */
+      }
+      .product-info {
+        width: 45%; /* Ajusta según sea necesario */
+      }
+      .thumbnails {
+        display: flex;
+        margin-top: 10px;
+      }
+      .thumbnail {
+        width: 50px; /* Ajusta según sea necesario */
+        height: 50px; /* Ajusta según sea necesario */
+        margin-right: 5px;
+        cursor: pointer;
+        border: 1px solid transparent; /* Borde por defecto */
+      }
+      .thumbnail.selected {
+        border: 1px solid #000; /* Borde para la miniatura seleccionada */
+      }
+
+      .splide__slide img {
+        height: 400px !important;
+      }
+
+      .splide__slide {
+        height: 400px !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="product-container">
+      <div id="main">
+        <h1 id="product_title">{{ product.title }}</h1>
+      </div>
+    </div>
+
+    <!-- Contenedor principal con dos columnas -->
+    <div class="product-container">
+      <!-- Columna de Imágenes y Miniaturas -->
+      <div class="product-images">
+        <div class="splide">
+          <div class="splide__track">
+            <ul class="splide__list">
+              {% for image in product.images %}
+                <li class="splide__slide">
+                  <img src="{{ image.src | img_url: 'master' }}" alt="{{ product.title }} - Imagen {{ forloop.index }}">
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Miniaturas de Imágenes -->
+        <div class="thumbnails">
+          {% for image in product.images %}
+            <img
+              class="thumbnail{% if forloop.first %} selected{% endif %}"
+              src="{{ image.src | img_url: 'thumb' }}"
+              alt="{{ product.title }} - Thumbnail {{ forloop.index }}"
+              onclick="changeImage({{ forloop.index }})"
+            >
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Columna de Información del Producto -->
+      <div class="product-info">
+        <!-- Precio del Producto -->
+        <p>
+          {% if product.compare_at_price_max > product.price -%}
+            <span style="text-decoration: line-through; color: #999;">{{ product.compare_at_price_max | money }}</span>
+            <span style="font-weight: bold; color: red;">{{ product.price | money }}</span>
+          {% else -%}
+            {{- product.price | money }}
+          {% endif -%}
+        </p>
+
+        <!-- Opciones del Producto -->
+        <div>
+          {% if product.options.size > 0 %}
+            {% for option in product.options %}
+              <label for="option-{{ forloop.index }}">
+                {{ option.name }}:
+                <select id="option-{{ forloop.index }}" name="options[{{ option.name | downcase }}]">
+                  {% for value in option.values %}
+                    <option value="{{ value | escape }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </label>
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <!-- Mensaje de Opción Seleccionada -->
+        <div id="selected-option-message"></div>
+
+        <!-- Links para Compartir en Redes Sociales -->
+        <div>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ product.url }}" target="_blank"
+            >Compartir en Facebook</a
+          >
+          <a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ product.url }}" target="_blank"
+            >Compartir en Twitter</a
+          >
+          <!-- Agrega más redes sociales según sea necesario -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Incluye las librerías de Slider (SplideJS) y cualquier script adicional -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.0.4/dist/js/splide.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var splide = new Splide('.splide', {
+          // Configuración del slider (puedes personalizar según necesites)
+          type: 'slide', // Cambiado a slide
+          heightRatio: 0.5,
+          arrowPath:
+            'M14.929 6.79289C15.1834 6.40237 15.8166 6.40237 16.2071 6.79289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L16.2071 17.2071C15.8166 17.5976 15.1834 17.5976 14.7929 17.2071C14.4024 16.8166 14.4024 16.1834 14.7929 15.7929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L14.7929 8.20711C14.4024 7.81658 14.4024 7.18342 14.7929 6.79289Z',
+          reverseArrow: true,
+          pagination: false,
+          arrows: true,
+        }).mount();
+
+        function changeImage(index) {
+          splide.go(index); // Cambiar a la imagen correspondiente al hacer clic en la miniatura
+          // Añadir clase 'selected' a la miniatura seleccionada
+          document.querySelectorAll('.thumbnail').forEach(function (thumbnail, i) {
+            thumbnail.classList.remove('selected');
+            if (i === index) {
+              thumbnail.classList.add('selected');
+            }
+          });
+        }
+
+        // Agrega eventos y lógica de JavaScript según tus necesidades
+        // Puedes usar Shopify Ajax API para manejar las selecciones de opciones
+        // Ejemplo de mensaje de opción seleccionada:
+        document.getElementById('selected-option-message').innerText =
+          'Opción seleccionada: ' + document.getElementById('option-1').value;
+
+        // Agregar eventos clic para cada miniatura
+        var thumbnails = document.querySelectorAll('.thumbnail');
+        thumbnails.forEach(function (thumbnail, index) {
+          thumbnail.addEventListener('click', function () {
+            changeImage(index);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
