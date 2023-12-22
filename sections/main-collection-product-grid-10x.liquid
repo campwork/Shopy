@@ -13,21 +13,55 @@
 {%- endif -%}
 
 {%- style -%}
-  .card-information {
-      display: none;
+        .titlebfriday
+          {
+          max-width:250px
+          }
+
+  .product-show-bfriday
+  {
+
+    margin-right: 5px;
   }
 
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+      .last-items-tag
+       {
+          background: red;
+          color: white;
+          border-radius: 12px;
+          padding: 5px 10px;
+          position: absolute;
+          font-weight: 700;
+      }
+
+    .price-tag
+    {
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 1;
+        margin: 0;
     }
 
-    @media screen and (min-width: 750px) {
-      .section-{{ section.id }}-padding {
-        padding-top: {{ section.settings.padding_top }}px;
-        padding-bottom: {{ section.settings.padding_bottom }}px;
+      .opciones-tag
+      {
+        max-width: 250px;
+        padding: 10px;
+        line-height: 1.2;
+        font-size: 12px;
+        font-weight: 600;
+
       }
-    }
+          .section-{{ section.id }}-padding {
+            padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+            padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+          }
+
+          @media screen and (min-width: 750px) {
+            .section-{{ section.id }}-padding {
+              padding-top: {{ section.settings.padding_top }}px;
+              padding-bottom: {{ section.settings.padding_bottom }}px;
+            }
+          }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
@@ -147,29 +181,29 @@
               "
             >
               {%- for product in collection.products -%}
-                {% assign lazy_load = false %}
-                {%- if forloop.index > 2 -%}
-                  {%- assign lazy_load = true -%}
-                {%- endif -%}
-                <li
-                  class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                  {% if settings.animations_reveal_on_scroll %}
-                    data-cascade
-                    style="--animation-order: {{ forloop.index }};"
+                <!-- Verificar si el producto tiene un stock menor a 5 -->
+
+                <div class="product-show-bfriday col-3">
+                  {% if product.available and product.variants.first.inventory_quantity < 5 %}
+                    <span class="last-items-tag ">Last Items</span>
                   {% endif %}
-                >
-                  {% render 'card-product',
-                    card_product: product,
-                    media_aspect_ratio: section.settings.image_ratio,
-                    image_shape: section.settings.image_shape,
-                    show_secondary_image: section.settings.show_secondary_image,
-                    show_vendor: section.settings.show_vendor,
-                    show_rating: section.settings.show_rating,
-                    lazy_load: lazy_load,
-                    show_quick_add: section.settings.enable_quick_add,
-                    section_id: section.id
-                  %}
-                </li>
+
+                  {% if product.images.size > 0 %}
+                    <a href="{{ product.url }}">
+                      <img src="{{ product.featured_image.src | img_url: '240x300' }}" alt="{{ product.title }}">
+                    </a>
+                  {% endif %}
+
+                  <h4 class="titlebfriday">{{ product.title }}</h4>
+
+                  <!-- Mostrar el precio del producto -->
+                  <p class="price-tag">Precio: {{ product.price | money }}</p>
+
+                  <!-- Verificar y mostrar opciones disponibles (Tallas y/o Colores) -->
+                  {% if product.variants.size > 1 %}
+                    <p class="opciones-tag">Opciones: {{ product.variants | map: 'title' | join: ', ' }}</p>
+                  {% endif %}
+                </div>
               {%- endfor -%}
             </ul>
 
