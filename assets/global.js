@@ -1321,31 +1321,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Captura el clic en el botón
-  document.getElementById('submit-btn').addEventListener('click', function() {
-    // Obtiene el valor seleccionado del select
-    var selectedOption = document.getElementById('size-select');
-    var selectedId = selectedOption.value;
-    var selectedColor = selectedOption.options[selectedOption.selectedIndex].getAttribute('data-color');
-
-    // Asigna el valor del ID y el color al campo oculto del formulario
-    var idInput = document.createElement('input');
-    idInput.type = 'hidden';
-    idInput.name = 'id';
-    idInput.value = selectedId;
-    document.getElementById('product-form').appendChild(idInput);
-
-    var colorInput = document.createElement('input');
-    colorInput.type = 'hidden';
-    colorInput.name = 'properties[_color]';
-    colorInput.value = selectedColor;
-    document.getElementById('product-form').appendChild(colorInput);
-
-    // Envía el formulario
-    document.getElementById('product-form').submit();
-  });
-});
-
-
 
