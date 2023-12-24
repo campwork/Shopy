@@ -1283,3 +1283,69 @@ function zoom(e){
   y = offsetY/zoomer.offsetHeight*100
   zoomer.style.backgroundPosition = x + '% ' + y + '%';
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  var splide = new Splide('.splide', {
+    type: 'slide',
+    heightRatio: 0.5,
+    arrowPath:
+      'M14.929 6.79289C15.1834 6.40237 15.8166 6.40237 16.2071 6.79289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L16.2071 17.2071C15.8166 17.5976 15.1834 17.5976 14.7929 17.2071C14.4024 16.8166 14.4024 16.1834 14.7929 15.7929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L14.7929 8.20711C14.4024 7.81658 14.4024 7.18342 14.7929 6.79289Z',
+    reverseArrow: true,
+    pagination: false,
+    arrows: true,
+  }).mount();
+
+  function changeImage(index) {
+    splide.go(index);
+    document.querySelectorAll('.thumbnail').forEach(function (thumbnail, i) {
+      thumbnail.classList.remove('selected');
+      if (i === index) {
+        thumbnail.classList.add('selected');
+      }
+    });
+  }
+
+  var option1Element = document.getElementById('option-1');
+  if (option1Element) {
+    document.getElementById('selected-option-message').innerText =
+      'Opción seleccionada: ' + option1Element.value;
+  } else {
+  }
+
+  var thumbnails = document.querySelectorAll('.thumbnail');
+  thumbnails.forEach(function (thumbnail, index) {
+    thumbnail.addEventListener('click', function () {
+      changeImage(index);
+    });
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Captura el clic en el botón
+  document.getElementById('submit-btn').addEventListener('click', function() {
+    // Obtiene el valor seleccionado del select
+    var selectedOption = document.getElementById('size-select');
+    var selectedId = selectedOption.value;
+    var selectedColor = selectedOption.options[selectedOption.selectedIndex].getAttribute('data-color');
+
+    // Asigna el valor del ID y el color al campo oculto del formulario
+    var idInput = document.createElement('input');
+    idInput.type = 'hidden';
+    idInput.name = 'id';
+    idInput.value = selectedId;
+    document.getElementById('product-form').appendChild(idInput);
+
+    var colorInput = document.createElement('input');
+    colorInput.type = 'hidden';
+    colorInput.name = 'properties[_color]';
+    colorInput.value = selectedColor;
+    document.getElementById('product-form').appendChild(colorInput);
+
+    // Envía el formulario
+    document.getElementById('product-form').submit();
+  });
+});
+
+
+
