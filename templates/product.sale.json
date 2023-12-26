@@ -6,10 +6,21 @@
           "padding_top": 28,
           "padding_bottom": 28
         }
+      },
+      "upsell": {
+        "type": "upsell",
+        "settings": {  
+        "padding_top": 28,
+        "padding_bottom": 28
+         }
       }
-   
     },
+
+    
+
     "order": [
-      "main-sale"    ]
+      "main-sale",
+      "upsell"
+        ]
   }
   
