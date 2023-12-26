@@ -3,7 +3,28 @@
   "name": "Main Product Sale",
   "tag": "section",
   "class": "section",
-  "settings": []
+  "settings": [
+    {
+      "type": "text",
+      "label": "Redes Sociales",
+      "id": "social_sharing_title"
+    },
+    {
+      "type": "url",
+      "label": "Enlace de Facebook",
+      "id": "facebook_share_link"
+    },
+    {
+      "type": "url",
+      "label": "Enlace de Twitter",
+      "id": "twitter_share_link"
+    },
+    {
+      "type": "url",
+      "label": "Enlace de Pinterest",
+      "id": "pinterest_share_link"
+    }
+  ]
 }
 {% endschema %}
 
@@ -267,6 +288,15 @@
     color: #fff;
     cursor: pointer;
   }
+
+  .svgvideo {
+    cursor: pointer;
+    background: rgba(30, 33, 44, 0.6);
+    width: 104px;
+    height: 104px;
+    padding: 40px;
+    margin-left: -125px;
+  }
 </style>
 
 <div class="product-container">
@@ -319,20 +349,13 @@
         {% if product.metafields.custom.youtube_id %}
           <!-- SVG button to open the modal -->
           <svg
+            class="svgvideo"
             id="myVideoButton"
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
             viewBox="0 0 32 32"
             fill="none"
-            style="
-              cursor: pointer;
-              background: rgba(0,0,0,0.5);
-              width: 104px;
-              height: 104px;
-              padding: 40px;
-              margin-left: -125px;
-            "
           >
             <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4237 13.8813C22.8201 14.9486 22.8201 17.0514 21.4237 18.1187L15.3171 22.786C13.5623 24.1272 11.0311 22.8759 11.0311 20.6673V11.3328C11.0311 9.12415 13.5623 7.8729 15.3171 9.21408L21.4237 13.8813ZM19.8043 16L13.6978 11.3328L13.6978 20.6673L19.8043 16Z" fill="white"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9999 3.99998C9.37253 3.99998 3.99995 9.37256 3.99995 16C3.99995 22.6274 9.37253 28 15.9999 28C22.6274 28 27.9999 22.6274 27.9999 16C27.9999 9.37256 22.6274 3.99998 15.9999 3.99998ZM1.33328 16C1.33328 7.8998 7.89977 1.33331 15.9999 1.33331C24.1001 1.33331 30.6666 7.8998 30.6666 16C30.6666 24.1002 24.1001 30.6666 15.9999 30.6666C7.89977 30.6666 1.33328 24.1002 1.33328 16Z" fill="white"/>
@@ -540,10 +563,10 @@
 
     <!-- Links para Compartir en Redes Sociales -->
     <div class="sharetab">
-      <p>Share:</p>
+      <p>{{ section.settings.social_sharing_title }}:</p>
       <a
         class="svgtag"
-        href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ product.url }}"
+        href="{{ section.settings.facebook_share_link }}"
         target="_blank"
       >
         <svg
@@ -557,7 +580,7 @@
         </svg>
       </a>
 
-      <a class="svgtag" href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ product.url }}" target="_blank">
+      <a class="svgtag" href="{{ section.settings.twitter_share_link }}" target="_blank">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -571,7 +594,7 @@
 
       <a
         class="svgtag"
-        href="https://www.pinterest.com/pin/create/button/?url={{ shop.url }}{{ product.url }}"
+        href="{{ section.settings.pinterest_share_link }}"
         target="_blank"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
