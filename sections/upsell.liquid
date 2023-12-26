@@ -1,7 +1,22 @@
+{% schema %}
+{
+  "name": "Upsell section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Title Upsell",
+      "id": "title_upsell"
+    }
+  ]
+}
+{% endschema %}
+
 <style>
   .product-container2 {
     display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Para pantallas pequeñas, muestra una columna */
+    grid-template-columns: repeat(1, 1fr);
     gap: 20px;
     max-width: 1180px;
     margin-left: auto;
@@ -59,8 +74,8 @@
   }
 </style>
 {% if product.metafields.custom.upsell %}
-  <div class="product-container2">
-    <h2 class="titleusm">Up sell</h2>
+  <div class="product-container">
+    <h2 class="titleusm">{{ section.settings.title_upsell }}</h2>
   </div>
 
   <div class="product-container2">

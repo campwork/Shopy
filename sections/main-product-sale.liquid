@@ -6,23 +6,28 @@
   "settings": [
     {
       "type": "text",
-      "label": "Redes Sociales",
+      "label": "Social Links",
       "id": "social_sharing_title"
     },
     {
       "type": "url",
-      "label": "Enlace de Facebook",
+      "label": "Link Facebook",
       "id": "facebook_share_link"
     },
     {
       "type": "url",
-      "label": "Enlace de Twitter",
+      "label": "Link Twitter",
       "id": "twitter_share_link"
     },
     {
       "type": "url",
-      "label": "Enlace de Pinterest",
+      "label": "Link Pinterest",
       "id": "pinterest_share_link"
+    },
+    {
+      "type": "text",
+      "label": "Title Upsell",
+      "id": "title_upsell"
     }
   ]
 }
@@ -33,10 +38,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.0.4/dist/css/splide.min.css">
 
 <style>
-  /* Estilos adicionales según tus necesidades */
   .product-container {
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    flex-wrap: wrap;
     justify-content: space-between;
     max-width: 1180px;
     margin: 0 auto;
@@ -44,10 +48,10 @@
   }
 
   .product-images {
-    width: 52%; /* Take up full width by default */
+    width: 52%;
   }
   .product-info {
-    width: 40%; /* Take up full width by default */
+    width: 40%; /
   }
 
   .thumbnails {
@@ -56,7 +60,7 @@
   }
 
   @media (max-width: 768px) {
-    /* Adjust styles for screens 768px and larger */
+
     .product-images,
     .product-info {
       width: 100%;
@@ -130,7 +134,7 @@
     color: white;
     border: 0px solid;
     line-height: 44px;
-    margin-top: 20px; /* 314.286% */
+    margin-top: 20px;
   }
 
   .title-tag {
@@ -183,12 +187,11 @@
     border: 1px solid var(--gray-400, #d7dadd);
     background: var(--white, #fff);
     color: #9a9ca5;
-    /* small/regular */
     font-family: Lato;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 150%; /* 21px */
+    line-height: 150%;
   }
 
   .splide__arrow {
@@ -199,12 +202,11 @@
 
   .titlevar {
     color: #424551;
-    /* small/regular */
     font-family: Lato;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 150%; /* 21px */
+    line-height: 150%;
   }
   .splide__arrow--next {
     right: 0.7em;
@@ -257,11 +259,11 @@
     position: relative;
   }
 
-  /* Estilos para el modal y su contenido */
+  /*  para el modal y su contenido */
   .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     left: 0;
     top: 0;
     width: 100%;
@@ -297,6 +299,15 @@
     padding: 40px;
     margin-left: -125px;
   }
+
+    .color-button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+    }
 </style>
 
 <div class="product-container">
@@ -453,8 +464,7 @@
             value: value
           };
     
-          // Push the variant object to the array
-          variantsArray.push(variantObject);
+        variantsArray.push(variantObject);
         {% endfor %}
     
         var colorSelect = document.getElementById('color-select');
@@ -540,26 +550,11 @@
             updateSelectedSize(selectedSize);
           });
           function updateSelectedSize(size) {
-            // Assuming selectedSizeDiv is a reference to an HTML element with the id "selectedSizeDiv"
             selectedSizeDiv.innerHTML = `, Size: <strong>${size}</strong>`;
           }
         </script>
       </div>
     </div>
-
-    <style>
-      .color-button {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        margin: 5px;
-        cursor: pointer;
-        border: none;
-      }
-    </style>
-
-    <!-- Mensaje de Opción Seleccionada -->
-    <div id="selected-option-message"></div>
 
     <!-- Links para Compartir en Redes Sociales -->
     <div class="sharetab">
