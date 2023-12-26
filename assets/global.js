@@ -1322,3 +1322,80 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+const colorButtons = document.querySelectorAll('.color-button');
+const colorSelect = document.getElementById('color-select');
+const selectedColorNames = document.querySelectorAll('.selected-color-name');
+
+colorButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        const selectedColor = button.getAttribute('data-color');
+        filterSelectByColor(selectedColor);
+    });
+});
+
+colorSelect.addEventListener('change', () => {
+    const selectedColor = colorSelect.value;
+    updateSelectedColorNames(selectedColor);
+});
+
+function filterSelectByColor(color) {
+    colorSelect.value = color;
+    // Simulate the 'change' event to visually update the select
+    const event = new Event('change');
+    colorSelect.dispatchEvent(event);
+
+    // Additional logic can be added here as needed
+    console.log('Color selected:', color);
+}
+
+function updateSelectedColorNames(color) {
+    // If no color is selected, display the first option by default
+    const selectedColor = color || colorSelect.options[0].value;
+
+    selectedColorNames.forEach((name) => {
+        name.textContent = `${selectedColor}`;
+    });
+}
+
+
+
+  // Selecciona la imagen en lugar del botón
+  var imageButton = document.getElementById('myVideoButton');
+  var modal = document.getElementById('myModal');
+  var span = document.getElementsByClassName('close')[0];
+
+  // Almacena la referencia al iframe del video de YouTube
+  var youtubeIframe;
+
+  // Mostrar el modal al hacer clic en la imagen
+  imageButton.onclick = function () {
+    modal.style.display = 'block';
+    // Obtén la referencia al iframe después de mostrar el modal
+    youtubeIframe = document.getElementById('youtubeVideo');
+  };
+
+  // Cerrar el modal y detener la reproducción del video al hacer clic en la "X"
+  span.onclick = function () {
+    modal.style.display = 'none';
+    // Detener la reproducción del video al cerrar el modal
+    if (youtubeIframe) {
+      youtubeIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+    }
+  };
+
+  // Cerrar el modal y detener la reproducción del video al hacer clic fuera del contenido del modal
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      // Detener la reproducción del video al cerrar el modal
+      if (youtubeIframe) {
+        youtubeIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+      }
+    }
+  };
+
+
+
+
+
+  

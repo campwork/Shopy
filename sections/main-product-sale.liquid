@@ -15,14 +15,16 @@
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     justify-content: space-between;
-    max-width: 1230px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 24px 15px;
   }
 
-  .product-images,
+  .product-images {
+    width: 52%; /* Take up full width by default */
+  }
   .product-info {
-    width: 45%; /* Take up full width by default */
+    width: 40%; /* Take up full width by default */
   }
 
   .thumbnails {
@@ -60,27 +62,37 @@
   }
 
   .thumbnail {
-    width: 104px; /* Ajusta según sea necesario */
-    height: 104px; /* Ajusta según sea necesario */
-    margin-right: 5px;
+    width: 104px;
+    height: 104px;
+    margin-right: 20px;
     cursor: pointer;
     object-fit: none;
     border-radius: 4px;
-    border: 1px solid transparent; /* Borde por defecto */
+    border: 1px solid transparent;
+    min-width: 104px;
   }
   .thumbnail.selected {
     border: 1px solid var(--primary, #17696a);
   }
+  .bsvg {
+    border: 1px solid #d7dadd;
+    border-radius: 50%;
+  }
+
+  .bsvg.selected {
+    border: 1px solid var(--primary, #17696a);
+  }
 
   .splide__slide img {
-    height: 550px !important;
+    height: 585px !important;
     object-fit: cover;
     width: 100%;
     object-position: center;
+    border-radius: 5px;
   }
 
   .splide__slide {
-    height: 550px !important;
+    height: 585px !important;
   }
 
   .btn-tag {
@@ -104,13 +116,21 @@
     font-size: 46px;
     font-style: normal;
     font-weight: 900;
-    line-height: 130%; /* 59.8px */
+    line-height: 1;
+    padding: 0;
+    margin: 0;
   }
 
   .sharetab {
     display: flex;
     height: 50px;
     margin-top: 0px;
+    color: #1e212c;
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 160%;
   }
   .svgtag {
     height: 24px;
@@ -164,30 +184,98 @@
     line-height: 150%; /* 21px */
   }
   .splide__arrow--next {
-    right: 0.3em;
+    right: 0.7em;
     font-size: 50px;
     padding-top: 15px;
     padding-left: 12px;
     width: 48px;
     height: 48px;
   }
+  .splide__arrow--prev {
+    left: 2em;
+  }
+
   .splide__arrow--prev svg {
     transform: scaleX(-1);
-    left: 0.3em;
+    left: 0.7em;
     font-size: 50px;
     padding-top: 15px;
-    padding-left: 12px;
+    padding-left: 15px;
     width: 48px;
     height: 48px;
   }
 
   .splide__arrow svg {
-    fill: #424551;
+    fill: #222;
+  }
+
+  .selectedvar {
+    display: flex;
+    margin-top: 30px;
+    color: #424551;
+    font-family: Lato;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 14px;
+  }
+
+  .textoffer {
+    background: #ff4242;
+    color: black;
+    font-weight: 900;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 5px 5px 0px 0px;
+    margin-bottom: -10px;
+    z-index: 99999;
+    position: relative;
+  }
+
+  /* Estilos para el modal y su contenido */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
+  .modal-content {
+    position: relative;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 700px;
+    color: #fff;
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
   }
 </style>
 
 <div class="product-container">
-  <div id="main">
+  <div
+    id="main"
+    style="
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+      padding-bottom: 20px;
+    "
+  >
     <h1 class="title-tag" id="product_title">{{ product.title }}</h1>
   </div>
 </div>
@@ -196,6 +284,12 @@
 <div class="product-container">
   <!-- Columna de Imágenes y Miniaturas -->
   <div class="product-images">
+    <div>
+      {% if product.metafields.custom.text_offer %}
+        <div class="textoffer">{{ product.metafields.custom.text_offer }}</div>
+      {% endif %}
+    </div>
+
     <div class="splide">
       <div class="splide__track">
         <ul class="splide__list">
@@ -224,13 +318,13 @@
   <!-- Columna de Información del Producto -->
   <div class="product-info">
     <!-- Precio del Producto -->
-    <p>
+    <p style="margin: 0;">
       {% if product.compare_at_price_max > product.price -%}
-        <span style="font-weight: bold; color: red;font-size: 24px;">
-          {{- product.compare_at_price_max | money -}}
+        <span style="font-weight: bold; color: #FF4242;font-size: 28px;">
+          {{- product.price | money -}}
         </span>
         <span style="text-decoration: line-through; color: #999;font-size: 18px; ">
-          {{- product.price | money -}}
+          {{- product.compare_at_price_max | money -}}
         </span>
       {% else -%}
         {{- product.price | money }}
@@ -259,64 +353,29 @@
             "
           >
             <svg
+              class="bsvg"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              style="border: 1px solid #D7DADD; border-radius: 50%;"
             >
               <circle cx="12" cy="12" r="11" fill="transparent" stroke="white" stroke-width="2"/>
             </svg>
           </button>
         {% endfor %}
       </div>
-      <div
-        id="selected-color-name"
-        style="margin-left: 15px;margin-top: 5px;"
-      ></div>
+      <div class="selected-color-name" style="margin-left: 15px; margin-top: 5px;"></div>
     </div>
 
-    <select style="display:none" id="color-select" name="color">
+    <select id="color-select" name="color" style="display:none">
       {% for color in unique_colors %}
         <option value="{{ color }}">{{ color }}</option>
       {% endfor %}
     </select>
 
-    <script>
-      const colorButtons = document.querySelectorAll('.color-button');
-      const colorSelect = document.getElementById('color-select');
-      const selectedColorName = document.getElementById('selected-color-name');
-
-      colorButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          const selectedColor = button.getAttribute('data-color');
-          filterSelectByColor(selectedColor);
-        });
-      });
-
-      colorSelect.addEventListener('change', () => {
-        const selectedColor = colorSelect.value;
-        updateSelectedColorName(selectedColor);
-      });
-
-      function filterSelectByColor(color) {
-        colorSelect.value = color;
-        // Simulate the 'change' event to visually update the select
-        const event = new Event('change');
-        colorSelect.dispatchEvent(event);
-
-        // Additional logic can be added here as needed
-        console.log('Color selected:', color);
-      }
-
-      function updateSelectedColorName(color) {
-        selectedColorName.textContent = `${color}`;
-      }
-    </script>
-
     <!-- Select para el tamaño -->
     <label for="size-select" class="titlevar">Size:</label>
-    <select id="size-select" class="sizeselect" name="size">
+    <select id="size-select" class="sizeselect" name="size" required>
       <option value="" disabled selected>Please select</option>
 
       {% assign unique_sizes = product.variants | map: 'option2' | uniq %}
@@ -368,7 +427,7 @@
             (opcion) => opcion.size === sizeSeleccionado && opcion.color === colorSeleccionado
           );
     
-          var valueCombinacion = opcionSeleccionada ? opcionSeleccionada.value : '';
+          var valueCombinacion = opcionSeleccionada ? opcionSeleccionada.value : '{{ product.variants.first.id }}';
     
           if (opcionSeleccionada) {
             var optionElement = document.createElement('option');
@@ -399,12 +458,43 @@
     </script>
 
     <!-- Display Selected Size -->
-    <div id="selected-size">
-      Selected Size:
+
+    <div class="selectedvar">
       <div
-        id="selected-color-name"
-        style="margin-left: 15px;margin-top: 5px;"
-      ></div>
+        id="selected-color"
+        style="        display: flex;"
+      >
+        Color:
+        <div
+          class="selected-color-name"
+          style="
+            color:#424551;
+            font-family: Lato;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 150%;
+            text-transform: capitalize;
+          "
+        ></div>
+      </div>
+      <div id="selected-size">
+        <div id="selected-size"></div>
+
+        <script>
+          const sizeSelect = document.getElementById('size-select');
+          const selectedSizeDiv = document.getElementById('selected-size');
+
+          sizeSelect.addEventListener('change', () => {
+            const selectedSize = sizeSelect.value;
+            updateSelectedSize(selectedSize);
+          });
+          function updateSelectedSize(size) {
+            // Assuming selectedSizeDiv is a reference to an HTML element with the id "selectedSizeDiv"
+            selectedSizeDiv.innerHTML = `, Size: <strong>${size}</strong>`;
+          }
+        </script>
+      </div>
     </div>
 
     <style>
@@ -462,9 +552,8 @@
         </svg>
       </a>
     </div>
-
-    <form method="get" action="/cart/add" name="product-form">
-      <input type="hidden" name="id" value="{{ valueCombinacion | default: '' }}">
+    <form method="post" action="/cart/add" name="product-form">
+      <input type="hidden" name="id" value="{{ valueCombinacion | default: product.variants.first }}">
       <input min="1" type="hidden" id="quantity" name="quantity" value="1">
 
       <button type="submit" id="submit-btn" class="btn-tag">
@@ -473,9 +562,28 @@
           <path fill-rule="evenodd" clip-rule="evenodd" d="M6.16667 11.6667C5.79848 11.6667 5.5 11.9651 5.5 12.3333C5.5 12.7015 5.79848 13 6.16667 13C6.53486 13 6.83333 12.7015 6.83333 12.3333C6.83333 11.9651 6.53486 11.6667 6.16667 11.6667ZM4.16667 12.3333C4.16667 11.2288 5.0621 10.3333 6.16667 10.3333C7.27124 10.3333 8.16667 11.2288 8.16667 12.3333C8.16667 13.4379 7.27124 14.3333 6.16667 14.3333C5.0621 14.3333 4.16667 13.4379 4.16667 12.3333Z" fill="white"/>
           <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 11.6667C12.1318 11.6667 11.8333 11.9651 11.8333 12.3333C11.8333 12.7015 12.1318 13 12.5 13C12.8682 13 13.1667 12.7015 13.1667 12.3333C13.1667 11.9651 12.8682 11.6667 12.5 11.6667ZM10.5 12.3333C10.5 11.2288 11.3954 10.3333 12.5 10.3333C13.6046 10.3333 14.5 11.2288 14.5 12.3333C14.5 13.4379 13.6046 14.3333 12.5 14.3333C11.3954 14.3333 10.5 13.4379 10.5 12.3333Z" fill="white"/>
         </svg>
-        Add to cart
+        Add to Cart
       </button>
     </form>
+  </div>
+</div>
+
+<!-- Imagen que servirá como botón para abrir el modal -->
+<img id="myVideoButton" src="ruta-de-tu-imagen.jpg" alt="Abrir Video" style="cursor: pointer;">
+
+<!-- Modal para el video de YouTube -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <!-- Inserta el código del video de YouTube a continuación -->
+    <iframe
+      id="youtubeVideo"
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/{{product.metafields.custom.youtube_id}}?enablejsapi=1"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
   </div>
 </div>
 
