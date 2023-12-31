@@ -3,33 +3,7 @@
   "name": "Main Product Sale",
   "tag": "section",
   "class": "section",
-  "settings": [
-    {
-      "type": "text",
-      "label": "Social Links",
-      "id": "social_sharing_title"
-    },
-    {
-      "type": "url",
-      "label": "Link Facebook",
-      "id": "facebook_share_link"
-    },
-    {
-      "type": "url",
-      "label": "Link Twitter",
-      "id": "twitter_share_link"
-    },
-    {
-      "type": "url",
-      "label": "Link Pinterest",
-      "id": "pinterest_share_link"
-    },
-    {
-      "type": "text",
-      "label": "Title Upsell",
-      "id": "title_upsell"
-    }
-  ]
+  "settings": []
 }
 {% endschema %}
 
@@ -38,9 +12,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.0.4/dist/css/splide.min.css">
 
 <style>
+  /* Estilos adicionales según tus necesidades */
   .product-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
     justify-content: space-between;
     max-width: 1180px;
     margin: 0 auto;
@@ -48,10 +23,10 @@
   }
 
   .product-images {
-    width: 52%;
+    width: 52%; /* Take up full width by default */
   }
   .product-info {
-    width: 40%; /
+    width: 40%; /* Take up full width by default */
   }
 
   .thumbnails {
@@ -60,7 +35,7 @@
   }
 
   @media (max-width: 768px) {
-
+    /* Adjust styles for screens 768px and larger */
     .product-images,
     .product-info {
       width: 100%;
@@ -134,7 +109,7 @@
     color: white;
     border: 0px solid;
     line-height: 44px;
-    margin-top: 20px;
+    margin-top: 20px; /* 314.286% */
   }
 
   .title-tag {
@@ -165,7 +140,6 @@
     margin-left: 20px;
   }
 
-
   .color-button {
     width: 24px !important;
     height: 24px !important;
@@ -188,11 +162,12 @@
     border: 1px solid var(--gray-400, #d7dadd);
     background: var(--white, #fff);
     color: #9a9ca5;
+    /* small/regular */
     font-family: Lato;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 150%;
+    line-height: 150%; /* 21px */
   }
 
   .splide__arrow {
@@ -203,11 +178,12 @@
 
   .titlevar {
     color: #424551;
+    /* small/regular */
     font-family: Lato;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 150%;
+    line-height: 150%; /* 21px */
   }
   .splide__arrow--next {
     right: 0.7em;
@@ -260,11 +236,11 @@
     position: relative;
   }
 
-  /*  para el modal y su contenido */
+  /* Estilos para el modal y su contenido */
   .modal {
     display: none;
     position: fixed;
-    z-index: 5;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -291,24 +267,6 @@
     color: #fff;
     cursor: pointer;
   }
-
-  .svgvideo {
-    cursor: pointer;
-    background: rgba(30, 33, 44, 0.6);
-    width: 104px;
-    height: 104px;
-    padding: 40px;
-    margin-left: -125px;
-  }
-
-    .color-button {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      margin: 5px;
-      cursor: pointer;
-      border: none;
-    }
 </style>
 
 <div class="product-container">
@@ -361,13 +319,20 @@
         {% if product.metafields.custom.youtube_id %}
           <!-- SVG button to open the modal -->
           <svg
-            class="svgvideo"
             id="myVideoButton"
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
             viewBox="0 0 32 32"
             fill="none"
+            style="
+              cursor: pointer;
+              background: rgba(0,0,0,0.5);
+              width: 104px;
+              height: 104px;
+              padding: 40px;
+              margin-left: -125px;
+            "
           >
             <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4237 13.8813C22.8201 14.9486 22.8201 17.0514 21.4237 18.1187L15.3171 22.786C13.5623 24.1272 11.0311 22.8759 11.0311 20.6673V11.3328C11.0311 9.12415 13.5623 7.8729 15.3171 9.21408L21.4237 13.8813ZM19.8043 16L13.6978 11.3328L13.6978 20.6673L19.8043 16Z" fill="white"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9999 3.99998C9.37253 3.99998 3.99995 9.37256 3.99995 16C3.99995 22.6274 9.37253 28 15.9999 28C22.6274 28 27.9999 22.6274 27.9999 16C27.9999 9.37256 22.6274 3.99998 15.9999 3.99998ZM1.33328 16C1.33328 7.8998 7.89977 1.33331 15.9999 1.33331C24.1001 1.33331 30.6666 7.8998 30.6666 16C30.6666 24.1002 24.1001 30.6666 15.9999 30.6666C7.89977 30.6666 1.33328 24.1002 1.33328 16Z" fill="white"/>
@@ -465,7 +430,8 @@
             value: value
           };
     
-        variantsArray.push(variantObject);
+          // Push the variant object to the array
+          variantsArray.push(variantObject);
         {% endfor %}
     
         var colorSelect = document.getElementById('color-select');
@@ -551,18 +517,33 @@
             updateSelectedSize(selectedSize);
           });
           function updateSelectedSize(size) {
+            // Assuming selectedSizeDiv is a reference to an HTML element with the id "selectedSizeDiv"
             selectedSizeDiv.innerHTML = `, Size: <strong>${size}</strong>`;
           }
         </script>
       </div>
     </div>
 
+    <style>
+      .color-button {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+      }
+    </style>
+
+    <!-- Mensaje de Opción Seleccionada -->
+    <div id="selected-option-message"></div>
+
     <!-- Links para Compartir en Redes Sociales -->
     <div class="sharetab">
-      <p>{{ section.settings.social_sharing_title }}:</p>
+      <p>Share:</p>
       <a
         class="svgtag"
-        href="{{ section.settings.facebook_share_link }}"
+        href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ product.url }}"
         target="_blank"
       >
         <svg
@@ -576,7 +557,7 @@
         </svg>
       </a>
 
-      <a class="svgtag" href="{{ section.settings.twitter_share_link }}" target="_blank">
+      <a class="svgtag" href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ product.url }}" target="_blank">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -590,7 +571,7 @@
 
       <a
         class="svgtag"
-        href="{{ section.settings.pinterest_share_link }}"
+        href="https://www.pinterest.com/pin/create/button/?url={{ shop.url }}{{ product.url }}"
         target="_blank"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

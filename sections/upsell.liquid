@@ -1,22 +1,7 @@
-{% schema %}
-{
-  "name": "Upsell section",
-  "tag": "section",
-  "class": "section",
-  "settings": [
-    {
-      "type": "text",
-      "label": "Title Upsell",
-      "id": "title_upsell"
-    }
-  ]
-}
-{% endschema %}
-
 <style>
   .product-container2 {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1, 1fr); /* Para pantallas pequeñas, muestra una columna */
     gap: 20px;
     max-width: 1180px;
     margin-left: auto;
@@ -35,21 +20,6 @@
 
   .titleus {
     font-size: 14px !important;
-    text-align: left;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .titleusm {
-    font-size: 36px;
-    font-weight: 600;
-  }
-
-  .titleup {
-    text-align: left;
-    font-weight: 600;
-    font-size: 22px;
-    margin-top: -5px;
   }
 
   @media (min-width: 576px) {
@@ -73,22 +43,15 @@
     }
   }
 </style>
-{% if product.metafields.custom.upsell %}
-  <div class="product-container">
-    <h2 class="titleusm">{{ section.settings.title_upsell }}</h2>
-  </div>
 
-  <div class="product-container2">
-    {% assign upsell_products = product.metafields.custom.upsell.value %}
+<div class="product-container2">
+  {% assign upsell_products = product.metafields.custom.upsell.value %}
 
-    {% for upsell_product in upsell_products %}
-      <div class="product-item">
-        <a href="{{ upsell_product.url }}">
-          <img src="{{ upsell_product.featured_image | img_url: '240x300' }}">
-          <h3 class="titleus">{{ upsell_product.title }}</h3>
-          <p class="titleup">{{ upsell_product.price }}</p>
-        </a>
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
+  {% for upsell_product in upsell_products %}
+    <div class="product-item">
+      <img src="{{ upsell_product.featured_image | img_url: '240x300' }}">
+      <h2 class="titleus">{{ upsell_product.title }}</h2>
+      <p>{{ upsell_product.price }}</p>
+    </div>
+  {% endfor %}
+</div>
