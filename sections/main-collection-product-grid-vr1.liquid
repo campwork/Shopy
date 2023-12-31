@@ -1,0 +1,42 @@
+<div class="product-grid">
+  {% for product in collection.products %}
+    <div class="product-item">
+      <h3>{{ product.title }}</h3>
+      <p>Precio: {{ product.price | money }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+{% if collection.products.size == 0 %}
+  <p>No hay productos disponibles en esta colección.</p>
+{% endif %}
+
+{% if section.settings.enable_filtering %}
+  <div class="filters">
+    <label for="filter">Filtrar por:</label>
+    <select id="filter">
+      <option value="all">Todos</option>
+      {% for tag in collection.all_tags %}
+        <option value="{{ tag }}">{{ tag }}</option>
+      {% endfor %}
+    </select>
+  </div>
+{% endif %}
+
+<style>
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .product-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .filters {
+    margin-top: 20px;
+  }
+</style>

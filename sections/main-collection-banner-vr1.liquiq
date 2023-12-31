@@ -1,0 +1,60 @@
+<!-- sections/seccion-banner.liquid -->
+
+<div class="banner-section">
+  <img src="{{ section.settings.banner_image | img_url: '600x' }}" class="bfridayimg" alt="Banner Image">
+
+  <div class="banner-content">
+    <h2 class="textbfriday">{{ section.settings.titulo_administrable }}</h2>
+  </div>
+</div>
+
+<style>
+  .banner-section {
+    position: relative;
+    text-align: center;
+  }
+  .bfridayimg {
+    width: 100%;
+    min-height: 600px;
+    object-fit: cover;
+    object-position: right;
+  }
+
+  .textbfriday {
+    font-size: 10rem;
+    text-align: left;
+    color: wheat;
+    line-height: 1;
+  }
+  .banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Banner Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "Banner Image",
+      "id": "banner_image"
+    },
+    {
+      "type": "text",
+      "label": "Título Administrable",
+      "id": "titulo_administrable"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
